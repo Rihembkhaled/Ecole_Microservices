@@ -1,0 +1,59 @@
+syntax = "proto3"; // Utiliser la syntaxe Proto3
+package etudiant;
+
+// Définition des messages pour les etudiants
+message Etudiant {
+  string id = 1; // Identifiant du etudiant
+  string nom = 2; // Nom du etudiant
+  string description = 3; // Description du etudiant
+}
+
+message GetEtudiantRequest {
+  string etudiant_id = 1; // Identifiant du etudiant
+}
+
+message GetEtudiantResponse {
+  Etudiant etudiant = 1; // Etudiant trouvé
+}
+
+message SearchEtudiantsRequest {} // Demande de recherche de tous les etudiants
+
+message SearchEtudiantsResponse {
+  repeated Etudiant etudiants = 1; // Liste des etudiants
+}
+
+message CreateEtudiantRequest {
+  string nom = 1; // Nom du etudiant
+  string description = 2; // Description du etudiant
+}
+
+message CreateEtudiantResponse {
+  Etudiant etudiant = 1; // Etudiant créé
+}
+
+message DeleteEtudiantRequest {
+  string Etudiant_id = 1; // Identifiant du etudiant à supprimer
+}
+
+message DeleteEtudiantResponse {
+  string message = 1; // Message de confirmation de suppression
+}
+
+message UpdateEtudiantRequest { // Demande de mise à jour du etudiant
+  string etudiant_id = 1; // ID du etudiant
+  string nom = 2; // Nouveau nom
+  string description = 3; // Nouvelle description
+}
+
+message UpdateEtudiantResponse { // Réponse à la mise à jour
+ Etudiant etudiant = 1; // etudiant mis à jour
+}
+
+// Service Etudiant avec toutes les opérations CRUD
+service EtudiantService {
+  rpc GetEtudiant(GetEtudiantRequest) returns (GetEtudiantResponse); // Obtenir un etudiant par ID
+  rpc SearchEtudiants(SearchEtudiantsRequest) returns (SearchEtudiantsResponse); // Obtenir tous les etudiants
+  rpc CreateEtudiant(CreateEtudiantRequest) returns (CreateEtudiantResponse); // Créer un etudiant
+  rpc DeleteEtudiant(DeleteEtudiantRequest) returns (DeleteEtudiantResponse); // Supprimer un etudiant par ID
+  rpc UpdateEtudiant(UpdateEtudiantRequest) returns (UpdateEtudiantResponse); // Mettre à jour un etudiant par ID
+}

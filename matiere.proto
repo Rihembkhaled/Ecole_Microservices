@@ -1,0 +1,59 @@
+syntax = "proto3"; // Utilisation de la syntaxe Proto3
+package matiere;
+
+// Définition des messages pour les matieres
+message Matiere {
+  string id = 1; // Identifiant du matiere
+  string nom = 2; // Nom du matiere
+  string description = 3; // Description du matiere
+}
+
+message GetMatiereRequest {
+  string matiere_id = 1; // Identifiant du matiere
+}
+
+message GetMatiereResponse {
+  Matiere matiere = 1; // Matiere trouvé
+}
+
+message SearchMatieresRequest {} // Demande de recherche de tous les matieres
+
+message SearchMatieresResponse {
+  repeated Matiere matieres = 1; // Liste des matieres
+}
+
+message CreateMatiereRequest {
+  string nom = 1; // Nom du matiere
+  string description = 2; // Description du matiere
+}
+
+message CreateMatiereResponse {
+  Matiere matiere = 1; // Matiere créé
+}
+
+message DeleteMatiereRequest { // Demande de suppression du matiere
+  string matiere_id = 1; // Identifiant du matiere à supprimer
+}
+
+message DeleteMatiereResponse { // Réponse à la suppression
+  string message = 1; // Message de confirmation
+}
+
+message UpdateMatiereRequest {
+  string matiere_id = 1; // Identifiant du matiere à mettre à jour
+  string nom = 2; // Nouveau nom
+  string description = 3; // Nouvelle description
+}
+
+message UpdateMatiereResponse {
+  Matiere matiere = 1; // Matiere mis à jour
+}
+
+// Service Matiere avec des opérations CRUD complètes
+service MatiereService {
+  rpc GetMatiere(GetMatiereRequest) returns (GetMatiereResponse); // Obtenir un matiere par ID
+  rpc SearchMatieres(SearchMatieresRequest) returns (SearchMatieresResponse); // Obtenir tous les matieres
+  rpc CreateMatiere(CreateMatiereRequest) returns (CreateMatiereResponse); // Créer un matiere
+  rpc DeleteMatiere(DeleteMatiereRequest) returns (DeleteMatiereResponse); // Supprimer un matiere par ID
+  rpc UpdateMatiere(UpdateMatiereRequest) returns (UpdateMatiereResponse); // Mettre à jour un matiere par ID
+}

@@ -1,0 +1,49 @@
+//prof.proto
+syntax = "proto3"; // Utilisez la syntaxe Proto3
+package prof;
+
+// Définition des messages
+message Prof {
+  string id = 1;
+  string nom = 2;
+  string description = 3;
+}
+
+message GetProfRequest {
+  string prof_id = 1; // Identifiant du prof
+}
+
+message GetProfResponse {
+  Prof prof = 1; // Le prof obtenu
+}
+
+message CreateProfRequest {
+  string nom = 1;
+  string description = 2;
+}
+
+message CreateProfResponse {
+  Prof prof = 1; // Le prof créé
+}
+message DeleteProfRequest {
+  string prof_id = 1; // Identifiant du prof à supprimer
+}
+
+message DeleteProfResponse {
+  string message = 1; // Message de confirmation
+}
+message UpdateProfRequest {
+  string prof_id = 1; // Identifiant du prof à mettre à jour
+  string nom = 2;
+  string description = 3;
+}
+
+message UpdateProfResponse {
+  Prof prof = 1; // Le prof mis à jour
+}
+service ProfService {
+  rpc GetProf(GetProfRequest) returns (GetProfResponse); // Obtenir un prof
+  rpc CreateProf(CreateProfRequest) returns (CreateProfResponse); // Créer un prof
+  rpc DeleteProf(DeleteProfRequest) returns (DeleteProfResponse); // Supprimer un prof
+  rpc UpdateProf(UpdateProfRequest) returns (UpdateProfResponse);
+}
